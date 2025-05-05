@@ -17,6 +17,12 @@ class Category extends Model
         ];
     }
 
+    public function rules(){
+        return [
+            'name'=>'required|string|max:255|unique:categories,name',
+        ];
+    }
+
     public function items(){
         return $this->hasMany(Item::class);
     }

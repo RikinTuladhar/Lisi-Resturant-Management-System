@@ -10,9 +10,19 @@ class CategoryController extends BaseController
     /**
      * Display a listing of the resource.
      */
+
+    protected $categorie;
+
+    public function __construct(Category $categorie)
+    {
+        $this->categorie = $categorie;
+    }
+
     public function index()
     {
         //
+        $categories = Category::all();
+        return $this->sendResponse($categories, 'Categories retrieved successfully.');
     }
 
     /**
@@ -21,6 +31,10 @@ class CategoryController extends BaseController
     public function store(Request $request)
     {
         //
+        $this->authorize('create',Category::class);
+        $validated = $request->validate($this->categorie->rules());
+        $newCategory = Category::create($validated);
+        return $this->sendResponse($newCategory, 'Category created successfully.');
     }
 
     /**

@@ -51,6 +51,14 @@ class User extends Authenticatable implements JWTSubject
         ];
     }
 
+    public function isAdmin(){
+        if(auth()->check() && auth()->user()->role == UserRole::ADMIN){
+            return true;
+        }else{
+            return false;
+        }
+    }
+
     public function getJWTIdentifier()
     {
         return $this->getKey();

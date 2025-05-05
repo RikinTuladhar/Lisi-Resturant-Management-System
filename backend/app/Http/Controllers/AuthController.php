@@ -6,10 +6,12 @@ use App\Models\User;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Http\Request;
+use PHPOpenSourceSaver\JWTAuth\JWTGuard;
 
 class AuthController extends BaseController
 {
-    function register(Request $request) {
+    function register(Request $request)
+    {
         $validator = Validator::make($request->all(), [
             'name' => 'required',
             'email' => 'required|email|unique:users,email',
@@ -24,13 +26,15 @@ class AuthController extends BaseController
         $user = User::create([
             'name' => $request->name,
             'email' => $request->email,
-            'password' => Hash::make($request->password) // Hashing the password
+            'password' => Hash::make($request->password),
+            'role' => $request->role
         ]);
 
         return $this->sendResponse(['user' => $user], 'User registered successfully.');
     }
 
-    function login(Request $request) {
+    function login(Request $request)
+    {
         $validator = Validator::make($request->all(), [
             'email' => 'required|email',
             'password' => 'required'
@@ -46,33 +50,46 @@ class AuthController extends BaseController
         if (!$user || !Hash::check($request->password, $user->password)) {
             return $this->sendErrorResponse('Unauthorized', ['error' => 'Invalid credentials.']);
         }
-
+        /** @var JWTGuard $auth */
         // Generate token
-        $token = auth()->login($user);
+        $auth = auth();
+        $token = $auth->login($user);
 
         return $this->sendResponse($this->respondWithToken($token), 'User logged in successfully.');
     }
 
-    function logout() {
-        auth()->logout();
+    function logout()
+    {
+        /** @var JWTGuard $auth */
+        $auth = auth();
+        $auth->logout();
         return $this->sendResponse([], 'Logout successfully.');
     }
 
-    function profile() {
-        $user = auth()->user();
+    function profile()
+    {
+        /** @var JWTGuard $auth */
+        $auth = auth();
+        $user = $auth->user();
         return $this->sendResponse(['user' => $user], 'User profile retrieved successfully.');
     }
 
-    function refresh() {
-        $token = auth()->refresh();
+    function refresh()
+    {
+        /** @var JWTGuard $auth */
+        $auth = auth();
+        $token =  $auth->refresh();
         return $this->sendResponse($this->respondWithToken($token), 'Token refreshed successfully.');
     }
 
-    protected function respondWithToken($token) {
+    protected function respondWithToken($token)
+    {
+        /** @var JWTGuard $auth */
+        $auth = auth();
         return [
             'access_token' => $token,
             'token_type' => 'bearer',
-            'expires_in' => auth()->factory()->getTTL() * 60
+            'expires_in' =>   $auth->factory()->getTTL() * 60
         ];
     }
 }

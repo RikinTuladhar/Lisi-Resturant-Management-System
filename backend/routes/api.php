@@ -14,12 +14,20 @@ Route::get('/login', function () {
 
 
 Route::group([
-    'middleware'=>'api',
-    'prefix'=>'auth'
-],function(){
-    Route::post('/register',[AuthController::class,"register"]);
-    Route::post('/login',[AuthController::class,"login"]);
-    Route::get('/logout',[AuthController::class,"logout"])->middleware('auth:api');
-    Route::get('/refresh',[AuthController::class,"refresh"])->middleware('auth:api');
-    Route::get('/profile',[AuthController::class,"profile"])->middleware('auth:api');
+    'middleware' => 'api',
+    'prefix' => 'auth'
+], function () {
+    Route::post('/register', [AuthController::class, "register"]);
+    Route::post('/login', [AuthController::class, "login"]);
+    Route::get('/logout', [AuthController::class, "logout"])->middleware('auth:api');
+    Route::get('/refresh', [AuthController::class, "refresh"])->middleware('auth:api');
+    Route::get('/profile', [AuthController::class, "profile"])->middleware('auth:api');
+});
+
+Route::group(['prefix'=>'public'],function(){
+    Route::apiResource('categories', \App\Http\Controllers\CategoryController::class)->only(['index']);
+});
+
+Route::middleware('auth:api')->group(function () {
+    Route::apiResource('categories', \App\Http\Controllers\CategoryController::class)->except(['index']);
 });
