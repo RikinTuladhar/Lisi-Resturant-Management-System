@@ -26,8 +26,9 @@ Route::group([
 
 Route::group(['prefix'=>'public'],function(){
     Route::apiResource('categories', \App\Http\Controllers\CategoryController::class)->only(['index']);
+    Route::apiResource('categories', \App\Http\Controllers\CategoryController::class)->only(['show']);
 });
 
 Route::middleware('auth:api')->group(function () {
-    Route::apiResource('categories', \App\Http\Controllers\CategoryController::class)->except(['index']);
+    Route::apiResource('categories', \App\Http\Controllers\CategoryController::class)->except(['index','show']);
 });

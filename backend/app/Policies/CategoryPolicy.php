@@ -38,17 +38,21 @@ class CategoryPolicy
     /**
      * Determine whether the user can update the model.
      */
-    public function update(User $user, category $category): bool
+    public function update(User $user, category $category): Response
     {
-        return false;
+        return $user->isAdmin()
+            ? Response::allow()
+            : Response::deny('Not allowed to update category');
     }
 
     /**
      * Determine whether the user can delete the model.
      */
-    public function delete(User $user, category $category): bool
+    public function delete(User $user, category $category): Response
     {
-        return false;
+        return $user->isAdmin()
+            ? Response::allow()
+            : Response::deny('Not allowed to delete category');
     }
 
     /**
