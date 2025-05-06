@@ -2,6 +2,9 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Resources\User as ResourcesUser;
+use App\Http\Resources\UserCollection;
+use App\Http\Resources\UserResource;
 use App\Models\User;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Validator;
@@ -91,5 +94,31 @@ class AuthController extends BaseController
             'token_type' => 'bearer',
             'expires_in' =>   $auth->factory()->getTTL() * 60
         ];
+    }
+
+    public function getUsers()
+    {
+        $users = User::all();
+        return $this->sendResponse(UserResource::collection($users), 'Users retrieved successfully.');
+    }
+
+    public function getUser($user_id)
+    {
+        $user = User::find($user_id);
+        if (!$user) {
+            return $this->sendErrorResponse('User not found', ['error' => 'User not found.']);
+        }
+        return $this->sendResponse(new UserResource($user), 'User retrieved successfully.');
+    }
+
+    public function getUsersByRole(Request $request)
+    {
+        $role = $request->query('role');
+        if (!$role) {
+            return $this->sendErrorResponse('Role not specified', ['error' => 'Role not specified.']);
+        }
+
+        $users = User::where('role', $role)->get();
+        return $this->sendResponse(UserResource::collection($users), 'Users retrieved successfully.');
     }
 }

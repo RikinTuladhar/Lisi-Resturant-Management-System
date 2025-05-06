@@ -23,6 +23,16 @@ class Item extends Model
         ];
     }
 
+    public function rules()
+    {
+        return [
+            'name' => 'required|string|max:255|unique:items,name',
+            'description' => 'nullable|string',
+            'category_id' => 'required|exists:categories,id',
+            'price' => 'required|numeric|min:0',
+        ];
+    }
+
     public function category()
     {
         return $this->belongsTo(Category::class);
@@ -32,8 +42,4 @@ class Item extends Model
     {
         return $this->hasMany(OrderItem::class);
     }
-    
-    
-
-
 }

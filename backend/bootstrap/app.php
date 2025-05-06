@@ -23,7 +23,8 @@ return Application::configure(basePath: dirname(__DIR__))
         $exceptions->render(function (AuthenticationException $e, Request $request) {
             if ($request->is('api/*') || $request->expectsJson()) {
                 return response()->json([
-                    'message' => $e->getMessage()
+                    'message' => $e->getMessage(),
+                    'status' => false
                 ], 401);
             }
         });
@@ -31,7 +32,8 @@ return Application::configure(basePath: dirname(__DIR__))
         $exceptions->render(function (NotFoundHttpException $e, Request $request) {
             if ($request->is('api/*') || $request->expectsJson()) {
                 return response()->json([
-                    'message' =>  $e->getMessage() ?: 'Resource not found.'
+                    'message' =>  $e->getMessage() ?: 'Resource not found.',
+                    'status' => false
                 ], 404);
             }
         });
@@ -39,7 +41,9 @@ return Application::configure(basePath: dirname(__DIR__))
         $exceptions->render(function (AuthorizationException $e, Request $request) {
             if ($request->is('api/*') || $request->expectsJson()) {
                 return response()->json([
-                    'message' => $e->getMessage() ?: 'This action is unauthorized.'
+                    'message' => $e->getMessage() ?: 'This action is unauthorized.',
+                    'status' => false
+
                 ], 403);
             }
         });

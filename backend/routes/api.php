@@ -24,11 +24,19 @@ Route::group([
     Route::get('/profile', [AuthController::class, "profile"])->middleware('auth:api');
 });
 
-Route::group(['prefix'=>'public'],function(){
+Route::group(["prefix" => 'users'], function () {
+    Route::get('/get-users', action: [AuthController::class, "getUsers"]);
+    Route::get('get-user/{user_id}', [AuthController::class, "getUser"]);
+    Route::get('/get-user-by-role', [AuthController::class, "getUsersByRole"]);
+});
+
+Route::group(['prefix' => 'public'], function () {
     Route::apiResource('categories', \App\Http\Controllers\CategoryController::class)->only(['index']);
     Route::apiResource('categories', \App\Http\Controllers\CategoryController::class)->only(['show']);
+    Route::apiResource('items', \App\Http\Controllers\ItemController::class)->only(['index','show']);
 });
 
 Route::middleware('auth:api')->group(function () {
-    Route::apiResource('categories', \App\Http\Controllers\CategoryController::class)->except(['index','show']);
+    Route::apiResource('categories', \App\Http\Controllers\CategoryController::class)->except(['index', 'show']);
+    Route::apiResource('items', \App\Http\Controllers\ItemController::class)->except(['index', 'show']);
 });
