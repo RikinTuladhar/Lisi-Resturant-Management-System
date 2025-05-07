@@ -12,9 +12,9 @@ return new class extends Migration
             $table->id(); // Primary key
             $table->string('name');
             $table->decimal('total_price', 10, 2); // Total price of the order
-            $table->enum('status',['pending','completed','canceled'])->default('pending');
-            $table->foreignId('invoice_id')->constrained()->onDelete('cascade'); // Invoice relation
-            $table->foreignId('user_id')->constrained()->onDelete('null'); // User relation
+            $table->enum('status', ['pending', 'completed', 'canceled'])->default('pending');
+            $table->foreignId('invoice_id')->nullable()->constrained()->nullOnDelete(); // Invoice relation
+            $table->foreignId('user_id')->nullable()->constrained()->nullOnDelete(); // User relation
             $table->timestamps(); // created_at and updated_at
         });
     }

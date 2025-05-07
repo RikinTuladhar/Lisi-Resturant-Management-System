@@ -33,10 +33,12 @@ Route::group(["prefix" => 'users'], function () {
 Route::group(['prefix' => 'public'], function () {
     Route::apiResource('categories', \App\Http\Controllers\CategoryController::class)->only(['index']);
     Route::apiResource('categories', \App\Http\Controllers\CategoryController::class)->only(['show']);
-    Route::apiResource('items', \App\Http\Controllers\ItemController::class)->only(['index','show']);
+    Route::apiResource('items', \App\Http\Controllers\ItemController::class)->only(['index', 'show']);
+    Route::apiResource('orders', \App\Http\Controllers\OrderController::class)->only(['index', 'show']);
 });
 
 Route::middleware('auth:api')->group(function () {
     Route::apiResource('categories', \App\Http\Controllers\CategoryController::class)->except(['index', 'show']);
     Route::apiResource('items', \App\Http\Controllers\ItemController::class)->except(['index', 'show']);
+    Route::apiResource('orders', \App\Http\Controllers\OrderController::class)->except(['index', 'show']);
 });

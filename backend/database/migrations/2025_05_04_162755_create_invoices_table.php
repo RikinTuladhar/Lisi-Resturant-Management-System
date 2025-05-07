@@ -14,7 +14,7 @@ return new class extends Migration
             $table->decimal('total_price', 10, 2);
             $table->decimal('service_charge', 8, 2)->default(0);
             $table->enum('status',['pending','completed','canceled'])->default('pending');
-            $table->foreignId('user_id')->constrained()->onDelete('cascade'); // Assuming invoices belong to a user
+            $table->foreignId('user_id')->nullable()->constrained()->onDelete('cascade'); // Assuming invoices belong to a user
             $table->timestamps();
         });
     }

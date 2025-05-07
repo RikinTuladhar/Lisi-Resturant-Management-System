@@ -9,12 +9,12 @@ return new class extends Migration
     public function up(): void
     {
         Schema::create('items', function (Blueprint $table) {
-            $table->id(); // Primary key
+            $table->id();
             $table->string('name');
             $table->text('description')->nullable();
-            $table->foreignId('category_id')->constrained()->onDelete('null'); // Foreign key to categories
-            $table->decimal('price', 10, 2); // You can adjust precision and scale as needed
-            $table->timestamps(); // created_at and updated_at
+            $table->foreignId('category_id')->nullable()->constrained()->nullOnDelete();
+            $table->decimal('price', 10, 2);
+            $table->timestamps();
         });
     }
 

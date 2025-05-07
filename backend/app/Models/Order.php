@@ -26,6 +26,26 @@ class Order extends Model
         ];
     }
 
+    public function rules()
+    {
+        return [
+            'name' => 'required|string|max:255',
+            'total_price' => 'required|numeric',
+            // 'user_id' => 'required|integer|exists:users,id',
+            'status' => 'required|string|in:pending,completed,canceled',
+        ];
+    }
+
+    public function orderItemRules()
+    {
+        return [
+            'item_id' => 'required|exists:items,id',
+            'units' => 'required|integer|min:1',
+            'order_price' => 'required|numeric|min:0',
+        ];
+    }
+
+
     public function orderItems()
     {
         return $this->hasMany(OrderItem::class);
