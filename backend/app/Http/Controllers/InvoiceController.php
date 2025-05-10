@@ -26,7 +26,7 @@ class InvoiceController extends BaseController
     /**
      * Display the specified resource.
      */
-    public function show(invoice $invoice)
+    public function show(Invoice $invoice)
     {
         //
     }
@@ -34,7 +34,7 @@ class InvoiceController extends BaseController
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, invoice $invoice)
+    public function update(Request $request, Invoice $invoice)
     {
         //
     }
@@ -42,7 +42,7 @@ class InvoiceController extends BaseController
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(invoice $invoice)
+    public function destroy(Invoice $invoice)
     {
         //
     }

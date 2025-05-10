@@ -66,7 +66,7 @@ class CategoryController extends BaseController
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(category $category)
+    public function destroy(Category $category)
     {
         //
         $this->authorize('delete', $category);
