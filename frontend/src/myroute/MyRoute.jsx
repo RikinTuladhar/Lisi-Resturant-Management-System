@@ -2,6 +2,8 @@ import { createBrowserRouter, RouterProvider } from "react-router-dom";
 import AdminLayout from "../admin/AdminLayout";
 import HomeLayout from "../home/HomeLayout";
 import Login from "../auth/Login";
+import AdminDashboard from "../admin/dashboard/AdminDashboard";
+import AdminCategory from "../admin/category/AdminCategory";
 const MyRouter = () => {
     const router = createBrowserRouter([
 
@@ -26,7 +28,11 @@ const MyRouter = () => {
             children: [
                 {
                     path: '/admin',
-                    element: <>Inside admin</>
+                    element: <AdminDashboard />
+                },
+                {
+                    path: '/admin/category',
+                    element: <AdminCategory />
                 }
             ]
         }
