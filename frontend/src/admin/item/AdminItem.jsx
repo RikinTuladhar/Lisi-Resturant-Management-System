@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import { Eye, Edit, Trash, X } from "lucide-react";
-import { useFetchItems, fetchItemById, DeleteItem } from "../../../apis/item/ItemAPI";
+import { useFetchItems, fetchItemById, DeleteItem } from "../../../apis/item/ItemApi";
 import { Link } from "react-router-dom";
 import { Toaster, toast } from "react-hot-toast";
 import { useMutation, useQueryClient } from "@tanstack/react-query";
