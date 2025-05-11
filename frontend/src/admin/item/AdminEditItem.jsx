@@ -3,7 +3,7 @@ import { useMutation, useQuery, useQueryClient } from '@tanstack/react-query';
 import { useNavigate, useParams } from 'react-router-dom';
 import { toast, Toaster } from 'react-hot-toast';
 import Cookies from 'js-cookie';
-import { EditItem, fetchItemById } from '../../../apis/item/ItemAPI';
+import { EditItem, fetchItemById } from '../../../apis/item/ItemApi';
 import { useFetchCategory } from '../../../apis/category/CategoryApi';
 
 const AdminEditItem = () => {
