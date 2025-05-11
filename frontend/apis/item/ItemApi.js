@@ -3,13 +3,9 @@ import Cookies from 'js-cookie'
 import axiosInstance from "../../lib/axios/axiosInstance"
 
 async function fetchItems() {
-    try {
-        const res = await axiosInstance.get("public/items")
-        const data = res?.data.data
-        return data
-    } catch (error) {
-        throw error
-    }
+    const res = await axiosInstance.get("public/items");
+    const data = res?.data.data;
+    return data;
 }
 
 export const useFetchItems = () => {
@@ -23,13 +19,9 @@ export const useFetchItems = () => {
 }
 
 export async function fetchItemById(id) {
-    try {
-        const res = await axiosInstance.get(`public/items/${id}`)
-        const data = await res?.data?.data
-        return data
-    } catch (error) {
-        throw error
-    }
+    const res = await axiosInstance.get(`public/items/${id}`);
+    const data = res?.data?.data;
+    return data;
 }
 
 export async function EditItem(item_id, values, token) {
