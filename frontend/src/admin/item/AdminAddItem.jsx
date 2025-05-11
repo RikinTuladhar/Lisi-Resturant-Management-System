@@ -3,8 +3,8 @@ import { useNavigate } from 'react-router-dom';
 import { useMutation } from '@tanstack/react-query';
 import { toast, Toaster } from 'react-hot-toast';
 import Cookies from 'js-cookie';
-import { CreateItem } from '../../../apis/item/ItemAPI';
-import { useFetchCategory } from '../../../apis/category/CategoryApi';
+import { CreateItem } from '../../apis/item/ItemAPI';
+import { useFetchCategory } from '../../apis/category/CategoryApi';
 
 const AdminAddItem = () => {
   const navigate = useNavigate();
