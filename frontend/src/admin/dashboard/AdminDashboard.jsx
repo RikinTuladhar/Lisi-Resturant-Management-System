@@ -20,9 +20,8 @@ const AdminDashboard = () => {
     }
 
     const stats = {
-        totalUsers: totalUsers?.length || 0,
         totalWorkers: totalUsers?.filter(user => user.role === 'worker').length || 0,
-        totalUsers: totalUsers.filter(user => user.role === 'user').length || 0,
+        totalUsers: totalUsers?.filter(user => user.role === 'user').length || 0,
         totalOrders: orders?.length || 0,
         pendingOrders: orders?.filter(order => order.status === 'pending').length || 0,
         completedOrders: orders?.filter(order => order.status === 'completed').length || 0,
