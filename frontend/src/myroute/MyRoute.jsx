@@ -4,6 +4,9 @@ import HomeLayout from "../home/HomeLayout";
 import Login from "../auth/Login";
 import AdminDashboard from "../admin/dashboard/AdminDashboard";
 import AdminCategory from "../admin/category/AdminCategory";
+import AdminItem from "../admin/item/AdminItem";
+import AdminAddItem from "../admin/item/AdminAddItem";
+import AdminEditItem from "../admin/item/AdminEditItem";
 const MyRouter = () => {
     const router = createBrowserRouter([
 
@@ -33,6 +36,16 @@ const MyRouter = () => {
                 {
                     path: '/admin/category',
                     element: <AdminCategory />
+                },
+                {
+                    path: '/admin/item',
+                    element: <AdminItem />
+                }, {
+                    path: "/admin/item/add",
+                    element: <AdminAddItem />
+                }, {
+                    path: "/admin/item/edit/:id",
+                    element: <AdminEditItem />
                 }
             ]
         }
