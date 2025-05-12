@@ -12,7 +12,6 @@ async function fetchUserProfile(token) {
             }
         });
         const data = res?.data?.data?.user;
-        console.log("User data", data);
         return data;
     } catch (error) {
         console.log("Error when fetching user data from token", error);

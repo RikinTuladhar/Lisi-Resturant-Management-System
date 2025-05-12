@@ -6,7 +6,6 @@ async function fetchCategory() {
     try {
         const res = await axiosInstance.get('public/categories')
         const data = await res?.data.data
-        console.log("Fetching categories", data)
         return data;
     } catch (error) {
         throw error
@@ -86,7 +85,6 @@ export const useCreateCategory = (token) => {
         mutationFn: async (values) => {
             const { value, from_arg_token } = values
 
-            console.log("name exist?", values)
             return await CreateCategory(value, from_arg_token);
         },
         onSuccess: () => {

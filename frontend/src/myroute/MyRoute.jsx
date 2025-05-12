@@ -7,6 +7,7 @@ import AdminCategory from "../admin/category/AdminCategory";
 import AdminItem from "../admin/item/AdminItem";
 import AdminAddItem from "../admin/item/AdminAddItem";
 import AdminEditItem from "../admin/item/AdminEditItem";
+import AdminWorker from "../admin/worker/AdminWorker";
 const MyRouter = () => {
     const router = createBrowserRouter([
 
@@ -46,6 +47,10 @@ const MyRouter = () => {
                 }, {
                     path: "/admin/item/edit/:id",
                     element: <AdminEditItem />
+                },
+                 {
+                    path: "/admin/worker",
+                    element: <AdminWorker />
                 }
             ]
         }

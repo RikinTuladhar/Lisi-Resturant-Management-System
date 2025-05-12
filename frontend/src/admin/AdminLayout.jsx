@@ -67,7 +67,7 @@ const AdminLayout = () => {
                             </li>
                             <li>
                                 <NavLink
-                                    to="/admin/workers"
+                                    to="/admin/worker"
                                     className={({ isActive }) =>
                                         `block p-2 rounded hover:bg-gray-700 ${isActive ? 'bg-gray-700' : ''}`
                                     }
@@ -77,7 +77,7 @@ const AdminLayout = () => {
                             </li>
                             <li>
                                 <NavLink
-                                    to="/admin/orders"
+                                    to="/admin/order"
                                     className={({ isActive }) =>
                                         `block p-2 rounded hover:bg-gray-700 ${isActive ? 'bg-gray-700' : ''}`
                                     }
