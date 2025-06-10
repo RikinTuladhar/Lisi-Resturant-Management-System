@@ -3,7 +3,6 @@
 namespace App\Providers\Filament;
 
 use App\Filament\Pages\Dashboard;
-use App\Http\Middleware\FilamentAuthenticate;
 use App\Http\Middleware\VerifyIsAdmin;
 use App\Models\User;
 use Filament\Http\Middleware\Authenticate;
@@ -33,6 +32,7 @@ class AdminPanelProvider extends PanelProvider
             ->path('admin')
             ->brandName('Admin Panel')
             ->login(\App\Filament\Admin\Pages\Login::class)
+            // ->registration(\App\Filament\Admin\Pages\Register::class)
             ->loginRouteSlug('login')
             ->authGuard('web')
             ->navigationGroups([
