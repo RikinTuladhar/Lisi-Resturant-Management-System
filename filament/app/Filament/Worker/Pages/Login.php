@@ -23,6 +23,7 @@ class Login extends BaseLogin
                 TextInput::make('password')
                     ->label('Password')
                     ->password()
+                    ->revealable()
                     ->required(),
             ]);
     }
