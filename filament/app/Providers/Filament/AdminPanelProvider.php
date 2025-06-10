@@ -30,6 +30,7 @@ class AdminPanelProvider extends PanelProvider
             ->default()
             ->id('admin')
             ->path('admin')
+            ->spa()
             ->brandName('Admin Panel')
             ->login(\App\Filament\Admin\Pages\Login::class)
             // ->registration(\App\Filament\Admin\Pages\Register::class)
