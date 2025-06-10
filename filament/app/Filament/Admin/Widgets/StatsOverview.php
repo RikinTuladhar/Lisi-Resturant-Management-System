@@ -34,7 +34,7 @@ class StatsOverview extends BaseWidget
                 ->chart($this->getLifetimeOrderGrowthData()->toArray())
                 ->icon('heroicon-o-shopping-cart'),
 
-            Stat::make('Total Sales', 'Rs ' . number_format(Invoice::sum('total_price')))
+            Stat::make('Lifetime Sales', 'Rs ' . number_format(Invoice::sum('total_price')))
                 ->color('success')
                 ->descriptionIcon('heroicon-o-currency-dollar')
                 ->chart($this->getLifetimeOrderGrowthData()->toArray())
