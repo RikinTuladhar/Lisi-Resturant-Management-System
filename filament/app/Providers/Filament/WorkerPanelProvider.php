@@ -28,7 +28,7 @@ class WorkerPanelProvider extends PanelProvider
             ->path('worker')
             ->brandName('Worker Panel')
             ->login(\App\Filament\Worker\Pages\Login::class)
-            ->registration(\App\Filament\Worker\Pages\Register::class)
+            // ->registration(\App\Filament\Worker\Pages\Register::class)
             ->colors([
                 'primary' => Color::Lime,
             ])

@@ -17,6 +17,10 @@ class VerifyIsAdmin
      */
     public function handle(Request $request, Closure $next): Response
     {
+        if ($request->is('admin/login')) {
+            return $next($request);
+        }
+
         if (Auth::user() && Auth::user()->role == UserRole::ADMIN) {
             return $next($request);
         }

@@ -17,6 +17,10 @@ class VerifyIsWorker
      */
     public function handle(Request $request, Closure $next): Response
     {
+        if ($request->is('worker/login')) {
+            return $next($request);
+        }
+
         if (Auth::user() && Auth::user()->role == UserRole::WORKER) {
             return $next($request);
         }
