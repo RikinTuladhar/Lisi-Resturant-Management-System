@@ -2,8 +2,7 @@
 
 namespace App\Providers\Filament;
 
-use App\Http\Middleware\VerifyIsAdmin;
-use App\Models\User;
+use App\Http\Middleware\VerifyIsWorker;
 use Filament\Http\Middleware\Authenticate;
 use Filament\Http\Middleware\AuthenticateSession;
 use Filament\Http\Middleware\DisableBladeIconComponents;
@@ -19,42 +18,27 @@ use Illuminate\Foundation\Http\Middleware\VerifyCsrfToken;
 use Illuminate\Routing\Middleware\SubstituteBindings;
 use Illuminate\Session\Middleware\StartSession;
 use Illuminate\View\Middleware\ShareErrorsFromSession;
-use Filament\Navigation\NavigationGroup;
 
-class AdminPanelProvider extends PanelProvider
+class WorkerPanelProvider extends PanelProvider
 {
     public function panel(Panel $panel): Panel
     {
         return $panel
-            ->default()
-            ->id('admin')
-            ->path('admin')
-            ->brandName('Admin Panel')
-            ->login(\App\Filament\Admin\Pages\Login::class)
-            ->registration(\App\Filament\Admin\Pages\Register::class)
-            ->navigationGroups([
-                NavigationGroup::make()
-                    ->label('System')
-                    ->collapsible(),         // optional
-
-                NavigationGroup::make()
-                    ->label('Management')
-                    ->collapsible(),
-
-                NavigationGroup::make()
-                    ->label('Finance')
-                    ->collapsible(),                     // optional
-            ])
+            ->id('worker')
+            ->path('worker')
+            ->brandName('Worker Panel')
+            ->login(\App\Filament\Worker\Pages\Login::class)
+            ->registration(\App\Filament\Worker\Pages\Register::class)
             ->colors([
-                'primary' => Color::Amber,
+                'primary' => Color::Lime,
             ])
-            ->discoverResources(in: app_path('Filament/Admin/Resources'), for: 'App\\Filament\\Admin\\Resources')
-            ->discoverPages(in: app_path('Filament/Admin/Pages'), for: 'App\\Filament\\Admin\\Pages')
-            ->discoverWidgets(in: app_path('Filament/Admin/Widgets'), for: 'App\\Filament\\Admin\\Widgets')
+            ->discoverResources(in: app_path('Filament/Worker/Resources'), for: 'App\\Filament\\Worker\\Resources')
+            ->discoverPages(in: app_path('Filament/Worker/Pages'), for: 'App\\Filament\\Worker\\Pages')
+            ->discoverWidgets(in: app_path('Filament/Worker/Widgets'), for: 'App\\Filament\\Worker\\Widgets')
             ->pages([
                 Pages\Dashboard::class,
             ])
-            ->discoverWidgets(in: app_path('Filament/Widgets'), for: 'App\\Filament\\Widgets')
+            ->discoverWidgets(in: app_path('Filament/Worker/Widgets'), for: 'App\\Filament\\Worker\\Widgets')
             ->widgets([
                 Widgets\AccountWidget::class,
                 Widgets\FilamentInfoWidget::class,
@@ -69,7 +53,7 @@ class AdminPanelProvider extends PanelProvider
                 SubstituteBindings::class,
                 DisableBladeIconComponents::class,
                 DispatchServingFilamentEvent::class,
-                VerifyIsAdmin::class,
+                VerifyIsWorker::class,
             ])
             ->authMiddleware([
                 Authenticate::class,
