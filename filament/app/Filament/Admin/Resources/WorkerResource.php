@@ -23,6 +23,12 @@ class WorkerResource extends Resource
     protected static ?string $navigationGroup = 'System';
     protected static ?int $navigationSort = 1;
 
+    public static function getEloquentQuery(): Builder
+    {
+        return parent::getEloquentQuery()
+            ->where('role', 'worker');
+    }
+
     public static function form(Form $form): Form
     {
         return $form
@@ -48,6 +54,7 @@ class WorkerResource extends Resource
     public static function table(Table $table): Table
     {
         return $table
+
             ->columns([
                 //
                 Tables\Columns\TextColumn::make('name')
